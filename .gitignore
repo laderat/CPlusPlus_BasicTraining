@@ -1,0 +1,14 @@
+Debug/
+Release/
+ipch/
+
+*.sdf
+*.opensdf
+*.suo
+*.user
+
+*.exe
+*.obj
+*.ilk
+*.pdb
+*.idb
