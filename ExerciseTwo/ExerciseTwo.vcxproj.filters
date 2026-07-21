@@ -16,7 +16,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="ReadMe.txt" />
-    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -25,16 +24,28 @@
     <ClInclude Include="targetver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Student.h">
+    <ClInclude Include="Wand.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Gender.h">
+    <ClInclude Include="InputWand.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Address.h">
+    <ClInclude Include="FilterWand.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="StudentFunction.h">
+    <ClInclude Include="WandFilterTypes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="WandFilter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="WandFilterCriterion.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DisplayWand.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="WandMenu.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -42,16 +53,19 @@
     <ClCompile Include="stdafx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Student.cpp">
+    <ClCompile Include="ExerciseTwo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Address.cpp">
+    <ClCompile Include="InputWand.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="StudentFunction.cpp">
+    <ClCompile Include="FilterWand.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Main.cpp">
+    <ClCompile Include="DisplayWand.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="WandMenu.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
