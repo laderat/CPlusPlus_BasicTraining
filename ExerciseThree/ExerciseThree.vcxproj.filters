@@ -24,37 +24,25 @@
     <ClInclude Include="targetver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Wand.h">
+    <ClInclude Include="ClassSchedule.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="FilterWand.h">
+    <ClInclude Include="PlottedClass.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="WandFilterTypes.h">
+    <ClInclude Include="Class.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="WandFilter.h">
+    <ClInclude Include="ClassRepository.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="WandFilterCriterion.h">
+    <ClInclude Include="SchedulePrinter.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="DisplayWand.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="WandMenu.h">
+    <ClInclude Include="SchedulePlotter.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="InputValidator.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="InputWand.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="DisplayDesign.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="DeleteWand.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -62,28 +50,22 @@
     <ClCompile Include="stdafx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ExerciseTwo.cpp">
+    <ClCompile Include="ExerciseThree.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="FilterWand.cpp">
+    <ClCompile Include="Class.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="DisplayWand.cpp">
+    <ClCompile Include="ClassRepository.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="WandMenu.cpp">
+    <ClCompile Include="SchedulePrinter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="InputWand.cpp">
+    <ClCompile Include="SchedulePlotter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="InputValidator.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="DisplayDesign.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="DeleteWand.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

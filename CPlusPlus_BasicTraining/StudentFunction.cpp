@@ -25,7 +25,7 @@ void EnterStudentInformation(Student& student){
 	void InputFirstName(Student& student){
 		string firstName;
 
-		cout << "Enter your firstname: ";
+		cout << "Enter the student's firstname: ";
 		getline(cin, firstName);
 
 		student.SetFirstName(firstName);
@@ -34,7 +34,7 @@ void EnterStudentInformation(Student& student){
 	void InputLastName(Student& student){
 		string lastName;
 
-		cout << "Enter your lastname: ";
+		cout << "Enter the student's lastname: ";
 		getline(cin, lastName);
 
 		student.SetLastName(lastName);

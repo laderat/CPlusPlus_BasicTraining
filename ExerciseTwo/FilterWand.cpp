@@ -2,120 +2,183 @@
 #include <iostream>
 #include <string>
 #include <list>
+#include <iostream>
 
+#include "DisplayDesign.h"
 #include "Wand.h"
 #include "FilterWand.h"
 #include "WandFilterTypes.h"
 #include "WandFilterCriterion.h"
-#include <iostream>
+#include "InputValidator.h"
 
 using namespace std;
 
-WandFilterCriterion createFilter();
+list<WandFilterCriterion> CreateCriteriaList();
+
+WandFilterCriterion CreateFilter();
+int GetFilterChoice();
+WandFilterCriterion CreateFilterByLength();
+int GetDesiredLengthToFilter();
+WandFilterOperation GetLengthOperationChoice();
+WandFilterCriterion CreateFilterByCore();
+WandFilterCriterion CreateFilterByWoodType();
+WandFilterOperation GetTextOperationChoice();
+
+bool ShouldCreateAnotherFilter();
+
 list<Wand> ApplyFilters(list<Wand>& wandStorage, list<WandFilterCriterion>& criteriaList);
-bool matchesCriteria(const Wand& wand,const WandFilterCriterion& criteria);
+bool MatchesCriteria(const Wand& wand,const WandFilterCriterion& criteria);
+bool MatchesLength(const Wand& wand, const WandFilterCriterion& criteria);
+bool MatchesText(const string& value, const WandFilterCriterion& criteria);
 
 list<Wand> FilterWand(list<Wand>& wandStorage){
-
-	list<WandFilterCriterion> criteriaList;
-
-	bool willContinue = true;
-
-	while (willContinue){
-		
-		WandFilterCriterion criterion = createFilter();
-
-		criteriaList.push_back(criterion);
-		
-		char input;
-
-		cout << "Enter Y if you wish to continue creating a filter: ";
-		cin >> input;
-
-		if(!(input == 'Y' || input == 'y')){
-			willContinue = false;
-		}
-	}
-
+	DisplayDesignHeader("Search Wands");
+	list<WandFilterCriterion> criteriaList = CreateCriteriaList();
+	
 	return ApplyFilters(wandStorage, criteriaList);
 }
 
-WandFilterCriterion createFilter(){
-	int choice;
-	WandFilterCriterion criteria;
+list<WandFilterCriterion> CreateCriteriaList(){
+	list<WandFilterCriterion> criteriaList;
 
-	cout << "Enter the matching request to add a filter: " << endl;
+	bool isRunning = true;
 
-	cout << "Enter 1 = Add filter for wand length; Enter 2 = Add filter for wand core; Enter 1 = Add filter for wand wood type;" << endl;
-	cin >> choice;	
-
-	if (choice == 1){
-		criteria.field = FilterByLength;
-		cout << "Enter the desired length to find: ";
-		cin >> criteria.numberValue;
-
-		int operationChoice;
-		cout <<  "Enter 1 = Equal ; Enter 2 = GreaterThan; Enter 3 = LessThan;" << endl;
-		cin >> operationChoice;
-
-		if (operationChoice == 1){
-			criteria.operation = OperationEqual;
-		}
-		else if (operationChoice == 2){
-			criteria.operation = OperationGreaterThan;
-		}
-		else if (operationChoice == 3){
-			criteria.operation = OperationLessThan;
-		}
-		else{
-			cout << "Enter a valid operation choice";
-		}
-
-	}else if (choice == 2){
-		criteria.field = FilterByCore;
-		cout << "Enter the desired core to find: ";
-		cin >> criteria.textValue;
-
-		int operationChoice;
-		cout <<  "Enter 1 = Equal ; Enter 2 = Contains" << endl;
-		cin >> operationChoice;
-
-		if (operationChoice == 1){
-			criteria.operation = OperationEqual;
-		}
-		else if (operationChoice == 2){
-			criteria.operation = OperationContains;
-		}
-		else{
-			cout << "Enter a valid operation choice";
-		}
-
-	}else if (choice == 3){
-		criteria.field = FilterByWoodType;
-		cout << "Enter the desired wood type to find: ";
-		cin >> criteria.textValue;
-
-		int operationChoice;
-		cout <<  "Enter 1 = Equal ; Enter 2 = Contains" << endl;
-		cin >> operationChoice;
-
-		if (operationChoice == 1){
-			criteria.operation = OperationEqual;
-		}
-		else if (operationChoice == 2){
-			criteria.operation = OperationContains;
-		}
-		else{
-			cout << "Enter a valid operation choice";
-		}
-
-	}else{
-		cout << "Enter the valid choice";
+	while (isRunning){
+		
+		WandFilterCriterion criterion = CreateFilter();
+		criteriaList.push_back(criterion);
+		
+		isRunning = ShouldCreateAnotherFilter();
 	}
 
-	return criteria;
+	return criteriaList;
+}
 
-};
+bool ShouldCreateAnotherFilter(){
+	char input;
+
+	cout << "Enter Y if you wish to continue creating a filter: ";
+	cin >> input;
+
+	return input == 'Y' || input == 'y';
+}
+
+
+
+WandFilterCriterion CreateFilter(){
+	int choice;
+
+	choice = GetFilterChoice();
+
+	switch (choice){
+		case 1:
+			return CreateFilterByLength();
+
+		case 2:
+			return CreateFilterByCore();
+
+		case 3:
+			return CreateFilterByWoodType();
+
+		default:
+			DisplayDesignWarning("Enter the valid choice");
+			return CreateFilter();
+	}
+}
+
+int GetFilterChoice(){
+	string filterChoiceMessage = "Enter Choice: ";
+
+	cout << "Enter corresponding number to add a filter: " << endl;
+	cout << "Enter 1 = Add filter for wand length "<< endl;
+	cout << "Enter 2 = Add filter for wand core "<< endl;
+	cout << "Enter 3 = Add filter for wand wood type"<< endl;
+
+	return GetValidInteger(filterChoiceMessage);
+}
+
+
+WandFilterCriterion CreateFilterByLength(){
+	WandFilterCriterion criteria;
+
+	criteria.field = FilterByLength;
+	criteria.numberValue = GetDesiredLengthToFilter();
+	criteria.operation = GetLengthOperationChoice();
+
+	return criteria;
+}
+
+int GetDesiredLengthToFilter(){
+	string desiredLengthMessage = "\nEnter the desired length to find: ";
+
+	return GetValidInteger(desiredLengthMessage);
+}
+
+WandFilterOperation GetLengthOperationChoice(){
+	string operationChoiceMessage = "\nEnter the desired operation: ";
+
+	cout << "Enter 1 = Equal" << endl;
+	cout << "Enter 2 = GreaterThan" << endl; 
+	cout << "Enter 3 = LessThan" << endl;
+
+	while(true){
+		int operationChoice = GetValidInteger(operationChoiceMessage);
+		switch (operationChoice){
+				case 1:
+					return OperationEqual;
+				case 2:
+					return OperationGreaterThan;
+				case 3:
+					return OperationLessThan;
+				default:
+					DisplayDesignWarning("Enter the valid operation choice");
+		}
+	}
+}
+
+
+WandFilterCriterion CreateFilterByCore(){
+	WandFilterCriterion criteria;
+
+	criteria.field = FilterByCore;
+	
+	criteria.textValue = GetValidString("\nEnter the desired core to find: ");
+
+	criteria.operation = GetTextOperationChoice();
+	return criteria;
+}
+
+
+WandFilterCriterion CreateFilterByWoodType(){
+	WandFilterCriterion criteria;
+
+	criteria.field = FilterByWoodType;
+	
+	criteria.textValue = GetValidString("\nEnter the desired wood type to find: ");
+
+	criteria.operation = GetTextOperationChoice();
+
+	return criteria;
+}
+
+WandFilterOperation GetTextOperationChoice(){
+	string operationChoiceMessage = "Enter the desired operation: ";
+
+	cout << "Enter 1 = Equal" << endl;
+	cout << "Enter 2 = Contains" << endl; 
+
+	while(true){
+		int operationChoice = GetValidInteger(operationChoiceMessage);
+		switch (operationChoice){
+				case 1:
+					return OperationEqual;
+				case 2:
+					return OperationContains;
+				default:
+					DisplayDesignWarning("Enter the valid operation choice");
+		}
+	}
+}
 
 list<Wand> ApplyFilters(list<Wand>& wandStorage, list<WandFilterCriterion>& criteriaList){
 	list<Wand> filteredWands;
@@ -128,7 +191,7 @@ list<Wand> ApplyFilters(list<Wand>& wandStorage, list<WandFilterCriterion>& crit
 		list<WandFilterCriterion>::const_iterator criteria;
 		for(criteria = criteriaList.begin(); criteria != criteriaList.end(); ++criteria){
 
-			if(!matchesCriteria(*wand, *criteria)){
+			if(!MatchesCriteria(*wand, *criteria)){
 				matchedAllCriteria = false;
 				break;
 			}
@@ -142,73 +205,52 @@ list<Wand> ApplyFilters(list<Wand>& wandStorage, list<WandFilterCriterion>& crit
 	return filteredWands;
 }
 
-bool matchesCriteria(const Wand& wand,const WandFilterCriterion& criteria){
+bool MatchesCriteria(const Wand& wand, const WandFilterCriterion& criteria){
 
-	WandFilterField field = criteria.field;
-	WandFilterOperation operation = criteria.operation;
-
-	switch (field){
+	switch (criteria.field){
 		case FilterByLength:
-
-			if (operation == OperationEqual){
-				if(wand.lengthInInches == criteria.numberValue){
-					return true;
-				}
-				return false;
-			}
-			else if (operation == OperationGreaterThan){
-				if(wand.lengthInInches > criteria.numberValue){
-					return true;
-				}
-				return false;
-			}
-			else if (operation == OperationLessThan){
-				if(wand.lengthInInches < criteria.numberValue){
-					return true;
-				}
-				return false;
-			}else {
-				return false;
-			}
-
-			break;
+			return MatchesLength(wand, criteria);
 
 		case FilterByCore:
-
-			if (operation == OperationEqual){
-				if(wand.core == criteria.textValue){
-					return true;
-				}
-				return false;
-			}
-			else if (operation == OperationContains){
-				if(wand.core.find(criteria.textValue) != string::npos){
-					return true;
-				}
-				return false;
-			}else {
-				return false;
-			}
-
-			break;
+			return MatchesText(wand.core, criteria);
 
 		case FilterByWoodType:
+			return MatchesText(wand.woodType, criteria);
 
-			if (operation == OperationEqual){
-				if(wand.woodType == criteria.textValue){
-					return true;
-				}
-				return false;
-			}
-			else if (operation == OperationContains){
-				if(wand.woodType.find(criteria.textValue) != string::npos){
-					return true;
-				}
-				return false;
-			}else {
-				return false;
-			}
-
-			break;
+		default:
+			return false;
 	}
 }
+
+bool MatchesLength(const Wand& wand, const WandFilterCriterion& criteria){
+
+	switch (criteria.operation){
+		case OperationEqual:
+			return wand.lengthInInches == criteria.numberValue;
+
+		case OperationGreaterThan:
+			return wand.lengthInInches > criteria.numberValue;
+
+		case OperationLessThan:
+			return wand.lengthInInches < criteria.numberValue;
+
+		default:
+			return false;
+	}
+}
+
+
+bool MatchesText(const string& value, const WandFilterCriterion& criteria){
+
+	switch (criteria.operation){
+		case OperationEqual:
+			return value == criteria.textValue;
+
+		case OperationContains:
+			return value.find(criteria.textValue) != string::npos;
+
+		default:
+			return false;
+	}
+}
+	

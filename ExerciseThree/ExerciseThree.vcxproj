@@ -11,9 +11,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{95EAA755-9569-4E45-96D1-E7AE655A34E0}</ProjectGuid>
+    <ProjectGuid>{357C5751-8F17-43DD-9302-8EB0C3E09741}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>ExerciseTwo</RootNamespace>
+    <RootNamespace>ExerciseThree</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -75,33 +75,27 @@
     <None Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="DeleteWand.h" />
-    <ClInclude Include="DisplayDesign.h" />
-    <ClInclude Include="DisplayWand.h" />
-    <ClInclude Include="FilterWand.h" />
+    <ClInclude Include="Class.h" />
+    <ClInclude Include="ClassRepository.h" />
+    <ClInclude Include="ClassSchedule.h" />
     <ClInclude Include="InputValidator.h" />
-    <ClInclude Include="InputWand.h" />
+    <ClInclude Include="PlottedClass.h" />
+    <ClInclude Include="SchedulePlotter.h" />
+    <ClInclude Include="SchedulePrinter.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
-    <ClInclude Include="Wand.h" />
-    <ClInclude Include="WandFilter.h" />
-    <ClInclude Include="WandFilterCriterion.h" />
-    <ClInclude Include="WandFilterTypes.h" />
-    <ClInclude Include="WandMenu.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="DeleteWand.cpp" />
-    <ClCompile Include="DisplayDesign.cpp" />
-    <ClCompile Include="DisplayWand.cpp" />
-    <ClCompile Include="ExerciseTwo.cpp" />
-    <ClCompile Include="FilterWand.cpp" />
+    <ClCompile Include="Class.cpp" />
+    <ClCompile Include="ClassRepository.cpp" />
+    <ClCompile Include="ExerciseThree.cpp" />
     <ClCompile Include="InputValidator.cpp" />
-    <ClCompile Include="InputWand.cpp" />
+    <ClCompile Include="SchedulePlotter.cpp" />
+    <ClCompile Include="SchedulePrinter.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="WandMenu.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

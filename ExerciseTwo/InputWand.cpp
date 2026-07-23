@@ -2,8 +2,10 @@
 #include <iostream>
 #include <list>
 
+#include "DisplayDesign.h"
 #include "Wand.h"
 #include "InputWand.h"
+#include "InputValidator.h"
 
 using namespace std;
 
@@ -15,6 +17,8 @@ void StoreIntoStorage(list<Wand>& wandStorage, Wand& wand);
 void InputWand(list<Wand>& wandStorage){
 	Wand wand;
 
+	
+	DisplayDesignHeader("Add Wand");
 	InputLength(wand);
 	InputCore(wand);
 	InputWoodType(wand);
@@ -22,18 +26,15 @@ void InputWand(list<Wand>& wandStorage){
 }
 
 void InputLength(Wand& wand){
-	cout << endl << "Input the inches of the wand: ";
-	cin >> wand.lengthInInches;
+	wand.lengthInInches = GetValidInteger("Input the inches of the wand: ");
 }
 
 void InputCore(Wand& wand){
-	cout << "Input the core of the wand: ";
-	cin >> wand.core;
+	wand.core  = GetValidString("Input the core of the wand: ");
 }
 
 void InputWoodType(Wand& wand){
-	cout << "Input the wood type of the wand: ";
-	cin >> wand.woodType;
+	wand.woodType  = GetValidString("Input the wood type of the wand: ");
 }
 
 void StoreIntoStorage(list<Wand>& wandStorage, Wand& wand){
